@@ -1,5 +1,5 @@
 resource "proxmox_vm_qemu" "admin" {
-  name    = "${var.vm_name}-${count.index + 1}"
+  name        = "${var.vm_name}-${count.index + 1}"
   target_node = var.target_node
   desc        = "Cloud init Ubuntu"
   count       = var.vm_count
