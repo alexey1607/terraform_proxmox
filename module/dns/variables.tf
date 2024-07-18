@@ -1,13 +1,13 @@
 variable "lxc_count" {
   description = "Number of LXC containers to create"
   type        = number
-  default     = 2
+  default     = 3
 }
 
 variable "lxc_base_name" {
   description = "Base name for LXC containers"
   type        = string
-  default     = "dns"
+  default     = "ns"
 }
 
 variable "lxc_template" {
