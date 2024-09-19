@@ -12,6 +12,8 @@ resource "proxmox_vm_qemu" "admin" {
   clone = var.vm_template
 
   agent = 1
+  agent_timeout = 60
+  skip_ipv6 = true
 
   os_type = "cloud-init"
 
