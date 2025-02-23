@@ -26,5 +26,9 @@ output "ldap_ip" {
 }
 
 output "vault_hostname" {
-  value = module.lb.hostname
+  value = module.vault.hostname
+}
+
+output "vault_ip" {
+  value = module.vault.ips
 }
