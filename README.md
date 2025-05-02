@@ -1,30 +1,25 @@
 # terraform labs
 tf_labs создаем LXC контейнеры и ВМ на сингл ноде ProxMox с бэкендом на S3 в яндекс клауде
 
-##### Создаем пользователя и выдаем права на создание VM и LXC контейнеров.
-
-### Prepare
+## Создаем пользователя и выдаем права на создание VM и LXC контейнеров.
 
 
-
-### Создать пользователя
-
+##### Создать пользователя
 ```
 pveum user add terraform@pam
 ```
-### Задаем пароль пользователю
 
+##### Задаем пароль пользователю
 ```
 pveum passwd terraform@pam
 ```
 
-
-### Выдаем пользователю права администратора
+##### Выдаем пользователю права администратора
 ```
 pveum aclmod / -user terraform@pam -role Administrator
 ```
 
-### Проверяем права
+##### Проверяем права
 ```
 pveum acl list
 ┌──────┬────────────┬──────┬───────────────┬───────────┐
@@ -34,7 +29,7 @@ pveum acl list
 └──────┴────────────┴──────┴───────────────┴───────────┘
 ```
 
-### Создаем токен для пользователя
+##### Создаем токен для пользователя
 ```
 root@pve:~# pveum user token add terraform@pam tf-token --privsep 0 --expire 0
 ┌──────────────┬──────────────────────────────────────┐
@@ -48,8 +43,7 @@ root@pve:~# pveum user token add terraform@pam tf-token --privsep 0 --expire 0
 └──────────────┴──────────────────────────────────────┘
 ```
 
-
-## Создаем файл с энвами 
+##### Создаем файл с энвами 
 ```
 cat ~/.secrets
 export ACCESS_KEY=access-key
@@ -57,26 +51,25 @@ export SECRET_KEY=secret-key
 export TF_VAR_pm_api_token_id=full-tokenid
 export TF_VAR_pm_api_token_secret=value
 ```
-## читаем энвы
+
+##### читаем энвы
 ```
 source ~/.secrets
 ```
 
-## инициализируем бэкенд 
+##### инициализируем бэкенд 
 ```
 terraform init -backend-config="access_key=$ACCESS_KEY" -backend-config="secret_key=$SECRET_KEY"
 ```
 
-### Post install
+## Post install
 
-## Обновляем доступные lxc шаблоны
-
+##### Обновляем доступные lxc шаблоны
 ```
 pveam update
 ```
 
-## Смотрим доступные системные шаблоны
-
+##### Смотрим доступные системные шаблоны
 ```
 root@pve:~# pveam available --section system
 system          almalinux-9-default_20240911_amd64.tar.xz
@@ -101,14 +94,14 @@ system          ubuntu-24.04-standard_24.04-2_amd64.tar.zst
 system          ubuntu-24.10-standard_24.10-1_amd64.tar.zst
 ```
 
-## Скачиваем нужный шаблон
+##### Скачиваем нужный шаблон
 ```
 root@pve:~# pveam download local ubuntu-24.10-standard_24.10-1_amd64.tar.zst
 ...
 cache/ubuntu-24.10-standard_24.10-1_amd64.tar.zst' finished
 ```
 
-## Просмотр скаченных шаблонов
+##### Просмотр скаченных шаблонов
 ```
 root@pve:~# pveam list local
 NAME                                                         SIZE
