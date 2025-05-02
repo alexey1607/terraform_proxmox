@@ -58,6 +58,7 @@ variable "network_config" {
     model  = string
   })
   default = {
+    id     = 0
     bridge = "vmbr0"
     model  = "virtio"
   }

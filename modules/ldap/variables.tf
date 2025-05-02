@@ -1,7 +1,7 @@
 variable "lxc_count" {
   description = "Number of LXC containers to create"
   type        = number
-  default     = 3
+  default     = 2
 }
 
 variable "lxc_base_name" {
@@ -13,7 +13,7 @@ variable "lxc_base_name" {
 variable "lxc_template" {
   description = "Template for LXC containers"
   type        = string
-  default     = "local:vztmpl/ubuntu-22.04-standard_22.04-1_amd64.tar.zst"
+  default     = "local:vztmpl/debian-12-standard_12.7-1_amd64.tar.zst"
 }
 
 variable "lxc_storage" {
